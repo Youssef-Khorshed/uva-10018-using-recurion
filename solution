@@ -1,0 +1,43 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+long long n,sum= 0, counter = 0;
+string s ;
+
+ string change_int(long long x)
+ {   if(!x)return s;
+     s += x%10 + '0';
+     return change_int(x/10);
+ }
+ long long rec (long long x)
+ {
+  if(!x)return sum;
+sum = sum*10 + x%10;
+return rec(x/10);
+
+ }
+ bool check(long long x)
+{
+
+   s = "";
+  string ss = change_int(x); reverse(ss.begin(),ss.end());
+   return s == ss;
+
+}
+
+void print()
+{
+
+ cin>>n;
+
+ while(!check(n))
+{
+   sum =  0;
+     n+=rec(n);
+     counter++;
+ }
+cout<<counter<<" "<<n<<endl;
+counter = 0;
+
+
+ }
